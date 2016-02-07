@@ -52,53 +52,52 @@ $(document).ready(function () {
 
 	// Movement Joystick
 	
-	var movement	= new VirtualJoystick({
-		container	: document.body,
-		strokeStyle	: 'cyan',
-		limitStickTravel: true,
-		stickRadius	: 50	
-	});
-	movement.addEventListener('touchStartValidation', function(event){
-		var touch	= event.changedTouches[0];
-		if( touch.pageX >= window.innerWidth/2 )	return false;
-		return true
-	});
+	//var movement	= new VirtualJoystick({
+	//	container	: document.body,
+	//	strokeStyle	: 'cyan',
+	//	limitStickTravel: true,
+	//	stickRadius	: 50	
+	//});
+	//movement.addEventListener('touchStartValidation', function(event){
+	//	var touch	= event.changedTouches[0];
+	//	if( touch.pageX >= window.innerWidth/2 )	return false;
+	//	return true
+	//});
 	
-	var prevAngle;
-	var prevDistance;
-	setInterval(function() {
-		var angle = u.angle({x:0,y:0}, {x:movement.deltaX(), y:movement.deltaY()});
-		var distance = u.distance({x:0,y:0}, {x:movement.deltaX(), y:movement.deltaY()});
+	//var prevAngle;
+	//var prevDistance;
+	//setInterval(function() {
+	//	var angle = u.angle({x:0,y:0}, {x:movement.deltaX(), y:movement.deltaY()});
+	//	var distance = u.distance({x:0,y:0}, {x:movement.deltaX(), y:movement.deltaY()});
 		
-		if (prevAngle !== angle && prevDistance != distance) {
-			prevAngle = angle !== 0 ? angle : prevAngle;
-			prevDistance = distance;
-			conn.sendMessage({"type": "movement", "angle": -prevAngle, "force": distance/50});			
-		}
+	//	if (prevAngle !== angle && prevDistance != distance) {
+	//		prevAngle = angle !== 0 ? angle : prevAngle;
+	//		prevDistance = distance;
+	//		conn.sendMessage({"type": "movement", "angle": -prevAngle, "force": distance/50});			
+	//	}
 
-	}, 1000/20);
+	//}, 1000/20);
 
 	// Shooting Joystick
 
-	var shooting	= new VirtualJoystick({
-		container	: document.body,
-		strokeStyle	: 'orange',
-		limitStickTravel: true,
-		stickRadius	: 0		
-	});
-	shooting.addEventListener('touchStartValidation', function(event){
-		var touch	= event.changedTouches[0];
-		if( touch.pageX < window.innerWidth/2 )	return false;
-		return true
-	});
-	shooting.addEventListener('touchStart', function(){
-		conn.sendMessage({"type": "fire"});
-	})
+	//var shooting	= new VirtualJoystick({
+	//	container	: document.body,
+	//	strokeStyle	: 'orange',
+	//	limitStickTravel: true,
+	//	stickRadius	: 0		
+	//});
+	//shooting.addEventListener('touchStartValidation', function(event){
+	//	var touch	= event.changedTouches[0];
+	//	if( touch.pageX < window.innerWidth/2 )	return false;
+	//	return true
+	//});
+	//shooting.addEventListener('touchStart', function(){
+	//	conn.sendMessage({"type": "fire"});
+	//})
 		
 
-	$("#spawn").on('touchup', function() {
-		$("#spawn").hide();
-		$("#health").show();		
+	$("#up").on('touchstart', function() {
+	    console.log("Pressed up");
 		conn.sendMessage({"type": "spawn"});
 	});
 

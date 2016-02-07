@@ -10,6 +10,7 @@ public class FireBullet : MonoBehaviour {
     public TankControls player;
     Collider2D bulletcollider;
     Rigidbody2D bullet;
+    public GameObject particles;
     void Awake()
     {
         bullet= GetComponent<Rigidbody2D>();
@@ -48,6 +49,8 @@ public class FireBullet : MonoBehaviour {
     {
         if (hitbox != null)
         {
+            Instantiate(particles, transform.position, transform.rotation);
+            
             Destroy(gameObject);
             
         }

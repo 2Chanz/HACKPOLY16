@@ -1,0 +1,35 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	background: black;
+}
+
+.joystick {
+	position: absolute;
+	width: 50vw;
+	height: 100vw;
+	margin: 0;
+	padding: 0;
+}
+
+#movement {
+	top: 0;
+	left: 0;
+}
+
+#shooting {
+	top: 0;
+	right: 0;
+}
+
+.joypad{
+	width: 40px;
+	height: 40px;
+	background-color: yellow;
+}
+
+#up {
+	position:fixed;
+	left: 60px;
+	top: 40px;
+}
