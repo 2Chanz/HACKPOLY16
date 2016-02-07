@@ -15,7 +15,7 @@ public class ExperimentalController : MonoBehaviour {
     public float jumpforce = 30;
     public float bulletPower = 0;
     public float maxbulletpower;
-    public float guncooldown = 1;
+    public Transform cannon;
     public GameObject bullet;
     float basespeed;
     float force = 0.0f;
@@ -66,22 +66,55 @@ public class ExperimentalController : MonoBehaviour {
 
     void applycontrols(ControllerMessage msg)
     {
-        bool s = msg.Payload.GetField("up");
+        
         Debug.Log(msg.Payload);
-        Debug.Log(s);
-        if (msg.Payload.GetField("up").ToString() == "true")
+        //Debug.Log(s);
+        if (msg.Payload.GetField("left").ToString() == "true")
         {
-            Debug.Log("Call move -1");
+            Debug.Log("Press Left");
             Move(-1);
         }
         else {
-            Debug.Log("Call move 0");
+            //Debug.Log("Call move 0");
             Move(0);
         }
+        if (msg.Payload.GetField("right").ToString() == "true")
+        {
+            Debug.Log("Press Right");
+            Move(1);
+        }
+        else
+        {
+            //Debug.Log("Call move 0");
+            Move(0);
+        }
+        if (msg.Payload.GetField("up").ToString() == "true")
+        {
+            Debug.Log("Press Up");
+            RotateLeft();
+           
+        }
+        else
+        {
+            //Debug.Log("Call move 0");
+            Move(0);
+        }
+        if (msg.Payload.GetField("down").ToString() == "true")
+        {
+            Debug.Log("Press Up");
+            RotateRight();
+
+        }
+        else
+        {
+            //Debug.Log("Call move 0");
+            Move(0);
+        }
+
+
     }
 
     void Move(float move)
-
     {
             //float move = Input.GetAxis("Horizontal");// Variable used to store the movement double when moving horizontally.
 
@@ -97,6 +130,14 @@ public class ExperimentalController : MonoBehaviour {
             GameObject bullets = (GameObject)Instantiate(bullet, firepoint.position, firepoint.rotation);
             //Instantiate(bullet, firepoint.position, firepoint.rotation);
         }
+    }
+    void RotateLeft()
+    {
+        cannon.Rotate(Vector3.forward);
+    }
+    void RotateRight()
+    {
+        cannon.Rotate(Vector3.back);
     }
     public void DamageTank()
     {

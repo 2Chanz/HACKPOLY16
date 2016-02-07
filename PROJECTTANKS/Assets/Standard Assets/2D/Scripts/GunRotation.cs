@@ -20,4 +20,12 @@ public class GunRotation : MonoBehaviour {
 
 
     }
+    void RotateLeft()
+    {
+        transform.Rotate(Vector3.forward);
+    }
+    void RotateRight()
+    {
+        transform.Rotate(Vector3.back);
+    }
 }
