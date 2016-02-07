@@ -78,6 +78,7 @@ public class ExperimentalController : MonoBehaviour {
             //Debug.Log("Call move 0");
             Move(0);
         }
+
         if (msg.Payload.GetField("right").ToString() == "true")
         {
             Debug.Log("Press Right");
@@ -88,16 +89,12 @@ public class ExperimentalController : MonoBehaviour {
             //Debug.Log("Call move 0");
             Move(0);
         }
+
         if (msg.Payload.GetField("up").ToString() == "true")
         {
             Debug.Log("Press Up");
             RotateLeft();
            
-        }
-        else
-        {
-            //Debug.Log("Call move 0");
-            Move(0);
         }
         if (msg.Payload.GetField("down").ToString() == "true")
         {
@@ -105,11 +102,32 @@ public class ExperimentalController : MonoBehaviour {
             RotateRight();
 
         }
+        if (msg.Payload.GetField("shoot").ToString() == "true")
+        {
+            if (bulletPower <= maxbulletpower)
+            {
+                bulletPower += Time.deltaTime;
+            }
+            Debug.Log("Shots fired");
+        }
         else
         {
-            //Debug.Log("Call move 0");
-            Move(0);
+            bullet.GetComponent<FireBullet>().bulletspeeds *= bulletPower;
+            FireBullet();
+            bullet.GetComponent<FireBullet>().bulletspeeds = basespeed;
+            bulletPower = 0;
         }
+        if (msg.Payload.GetField("jump").ToString() == "true")
+        {
+            if ((fuel > 0))
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce));
+
+                fuel--;
+            }
+            Debug.Log("Flying");
+        }
+
 
 
     }
@@ -123,13 +141,11 @@ public class ExperimentalController : MonoBehaviour {
     }
 
 
-    void FireBullet(ControllerMessage msg)
+    void FireBullet()
     {
-        if (msg.ControllerSource == playerindex)
-        {
+
             GameObject bullets = (GameObject)Instantiate(bullet, firepoint.position, firepoint.rotation);
             //Instantiate(bullet, firepoint.position, firepoint.rotation);
-        }
     }
     void RotateLeft()
     {
