@@ -16,6 +16,17 @@ body {
 	height: 60px;
 	background-color: red;
 }
+#shoot{
+	position:fixed;
+	top:20px;
+	left:400px;
+}
+
+#jump{
+	position:fixed;
+	top:80px;
+	left:400px;
+}
 #movement {
 	top: 0;
 	left: 0;
