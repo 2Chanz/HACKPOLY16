@@ -11,10 +11,14 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+.actions {
+	width: 60px;
+	height: 60px;
+}
 #movement {
 	top: 0;
 	left: 0;
+	background-color: red;
 }
 
 #shooting {
@@ -30,19 +34,19 @@ body {
 
 #up {
 	position:fixed;
-	left: 60px;
-	top: 60px;
+	left: 80px;
+	top: 20px;
 }
 
 #down {
 	position:fixed;
-	left: 60px;
+	left: 80px;
 	top: 160px;
 }
 
 #left {
 	position:fixed;
-	left:30px;
+	left:10px;
 	top: 100px;
 }
 
