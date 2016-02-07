@@ -14,11 +14,11 @@ body {
 .actions {
 	width: 60px;
 	height: 60px;
+	background-color: red;
 }
 #movement {
 	top: 0;
 	left: 0;
-	background-color: red;
 }
 
 #shooting {
