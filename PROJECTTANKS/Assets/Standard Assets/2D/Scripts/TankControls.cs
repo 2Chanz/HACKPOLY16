@@ -11,11 +11,17 @@ public class TankControls : MonoBehaviour {
     public Transform groundCheck;//variable to assign an empty object used for checking the ground. 
     public float fuel;
     public float jumpforce = 30;
+    public float bulletPower = 0;
+    public float maxbulletpower;
+    public float guncooldown = 1;
     public GameObject bullet;
+    float basespeed;
     public Transform firepoint;
     public LayerMask whatisGround; //Layer settings to adjust which objects in which layers are considered ground.
     void Start () {
         //tankGraphics = tankGraphics.transform.FindChild("Tank");
+        bulletPower = 0;
+        basespeed = bullet.GetComponent<FireBullet>().bulletspeeds;
 	}
 	
 	// Update is called once per frame
@@ -27,10 +33,24 @@ public class TankControls : MonoBehaviour {
             
             fuel--;
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            FireBullet();
-        }
+        
+            if (Input.GetMouseButton(0))
+            {
+
+                if (bulletPower <= maxbulletpower)
+                {
+                    bulletPower += Time.deltaTime;
+                }
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                bullet.GetComponent<FireBullet>().bulletspeeds *= bulletPower;
+                FireBullet();
+                bullet.GetComponent<FireBullet>().bulletspeeds = basespeed;
+                bulletPower = 0;
+               
+            }
+        
 
     }
 
@@ -50,8 +70,17 @@ public class TankControls : MonoBehaviour {
         TankHP -= 999999;
         if(TankHP <= 0)
         {
-
+            Destroy(this.gameObject);
         }
         
     }
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Bullet")
+        {
+            DamageTank();
+        }
+    }
+
+
 }

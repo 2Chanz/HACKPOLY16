@@ -4,21 +4,28 @@ using System.Collections;
 public class FireBullet : MonoBehaviour {
 
     // Use this for initialization
-    public int bulletspeeds;
+    public float bulletspeeds;
     public float lifetime = 2.0f;
     public int damage = 40;
+    public TankControls player;
     Collider2D bulletcollider;
     Rigidbody2D bullet;
     void Awake()
     {
         bullet= GetComponent<Rigidbody2D>();
         bulletcollider = GetComponent<Collider2D>();
+        
+    }
+    void Start()
+    {
+        
     }
     void Update()
     {
         if (true)
         {
             transform.position += Time.deltaTime * bulletspeeds * transform.right;
+            
         }
         destroy();
     }
@@ -41,7 +48,7 @@ public class FireBullet : MonoBehaviour {
     {
         if (hitbox != null)
         {
-            
+            Destroy(gameObject);
             
         }
         

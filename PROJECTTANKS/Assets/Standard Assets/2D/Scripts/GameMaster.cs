@@ -12,9 +12,11 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 	public Transform playerPrefab;
+    public Transform playerPrefab2;
 	public Transform spawnPoint;
-	//public Transform spawnPrefab;
-	public AudioClip spawnsound;
+    public Transform spawnPoint2;
+    //public Transform spawnPrefab;
+    public AudioClip spawnsound;
 
 
 
@@ -30,10 +32,30 @@ public class GameMaster : MonoBehaviour {
 		//Debug.Log ("Todo: Add Spawn Particles");
 
 	}
+    void FixedUpdate()
+    {
+        if (playerPrefab == null)
+        {
+            spawnDelay -= Time.deltaTime;
+            if (spawnDelay <= 0)
+            { 
+                Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+                spawnDelay = 2;
+            }
+        }
+        if (playerPrefab2 == null)
+        {
+            spawnDelay -= Time.deltaTime;
+            if (spawnDelay <= 0)
+            {
+                Instantiate(playerPrefab2, spawnPoint2.position, spawnPoint2.rotation);
+                spawnDelay = 2;
+            }
+        }
+
+    }
 	public static void KillPlayer (TankControls player) {
-		Destroy (player.gameObject);
-        
-		gm.StartCoroutine(gm.RespawnPlayer());
+		
 	}
 
 	public static void KillEnemy (){
