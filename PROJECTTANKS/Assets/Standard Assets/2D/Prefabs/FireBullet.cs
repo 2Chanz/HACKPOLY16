@@ -22,6 +22,11 @@ public class FireBullet : MonoBehaviour {
         }
         destroy();
     }
+    
+    void FixedUpdate()
+    {
+        
+    }
     void Travel()
     {
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);

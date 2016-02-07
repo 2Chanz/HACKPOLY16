@@ -4,7 +4,7 @@ using System.Collections;
 public class TankControls : MonoBehaviour {
 
     // Use this for initialization
-
+    public float TankHP = 1;
     public float maxSpeed = 10;  //public variable for movement speed.
     public Transform tankGraphics;    //variable to represent the "graphics" child object in the editor.
     bool grounded = false;       //bool to check if the sprite is touching the ground.
@@ -44,5 +44,14 @@ public class TankControls : MonoBehaviour {
     void FireBullet()
     {
         Instantiate(bullet, firepoint.position, firepoint.rotation);
+    }
+    public void DamageTank()
+    {
+        TankHP -= 999999;
+        if(TankHP <= 0)
+        {
+
+        }
+        
     }
 }
